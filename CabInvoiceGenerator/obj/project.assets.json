@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\EmployeeLogin\\CabInvoiceGenerator\\CabInvoiceGenerator.csproj",
+      "projectUniqueName": "F:\\InvoiceGenerator\\CabInvoiceGenerator\\CabInvoiceGenerator.csproj",
       "projectName": "CabInvoiceGenerator",
-      "projectPath": "F:\\EmployeeLogin\\CabInvoiceGenerator\\CabInvoiceGenerator.csproj",
+      "projectPath": "F:\\InvoiceGenerator\\CabInvoiceGenerator\\CabInvoiceGenerator.csproj",
       "packagesPath": "C:\\Users\\Amit Singh\\.nuget\\packages\\",
-      "outputPath": "F:\\EmployeeLogin\\CabInvoiceGenerator\\obj\\",
+      "outputPath": "F:\\InvoiceGenerator\\CabInvoiceGenerator\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Amit Singh\\AppData\\Roaming\\NuGet\\NuGet.Config",
