@@ -6,19 +6,17 @@ namespace CabInvoiceGenerator
 {
     public class InvoiceService
     {
-        
         private readonly int costPerKilometreNormal = 10;
         private readonly int minimumFareNormal = 5;
         private readonly int costPerMinuteNormal = 1;
-        private readonly int costPerKilometrePremium = 15;
-        private readonly int minimumFarePremium = 20;
-        private readonly int costPerMinutePremium = 2;
         private double totalCost = 0;
         private double totalFare = 0;
         private double averageFare = 0;
-        private int numberOfRides = 0;
+        private int totalRides = 0;
+        private readonly int costPerKilometrePremium = 15;
+        private readonly int minimumFarePremium = 20;
+        private readonly int costPerMinutePremium = 2;
 
-      
         public double Aggregate
         {
             get
@@ -31,7 +29,7 @@ namespace CabInvoiceGenerator
         {
             get
             {
-                return this.numberOfRides;
+                return this.totalRides;
             }
         }
 
@@ -64,8 +62,8 @@ namespace CabInvoiceGenerator
                 this.totalFare = this.totalFare + this.TotalFare(item.RideType, item.Distance, item.Time);
             }
 
-            this.numberOfRides = ride.Length;
-            this.averageFare = this.totalFare / this.numberOfRides;
+            this.totalRides = ride.Length;
+            this.averageFare = this.totalFare / this.totalRides;
             return this.totalFare;
         }
     }
