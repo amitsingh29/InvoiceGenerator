@@ -6,50 +6,67 @@ namespace CabInvoiceGenerator
 {
     public class InvoiceService
     {
-        public int costPerKilometer = 10;
-        public int costPerMinute = 1;
-        public int minimumFare = 5;
-        public double totalFare = 0;
-        public int totalRides = 0;
-        public double aggregateFare = 0;
+        
+        private readonly int costPerKilometreNormal = 10;
+        private readonly int minimumFareNormal = 5;
+        private readonly int costPerMinuteNormal = 1;
+        private readonly int costPerKilometrePremium = 15;
+        private readonly int minimumFarePremium = 20;
+        private readonly int costPerMinutePremium = 2;
+        private double totalCost = 0;
+        private double totalFare = 0;
+        private double averageFare = 0;
+        private int numberOfRides = 0;
 
+      
         public double Aggregate
         {
             get
             {
-                return this.aggregateFare;
+                return this.averageFare;
             }
         }
 
-        public int Rides
+        public int TotalRides
         {
             get
             {
-                return this.totalRides;
+                return this.numberOfRides;
             }
         }
 
-        public double TotalFare(double distance , double time)
+        public double TotalFare(string journeyType, double distance, double time)
         {
-            double totalFare = distance * this.costPerKilometer + time * this.costPerMinute;
-            if(totalFare > minimumFare)
+            if (journeyType == "normal")
             {
-                return totalFare;
+                this.totalCost = (distance * this.costPerKilometreNormal) + (time * this.costPerMinuteNormal);
+                if (this.totalCost > this.minimumFareNormal)
+                {
+                    return this.totalCost;
+                }
+
+                return this.minimumFareNormal;
             }
 
-            return minimumFare;
+            this.totalCost = (distance * this.costPerKilometrePremium) + (time * this.costPerMinutePremium);
+            if (this.totalCost > this.minimumFarePremium)
+            {
+                return this.totalCost;
+            }
+
+            return this.minimumFarePremium;
         }
 
-        public double TotalFare(Ride[] rides)
+        public double CalculateMonthlyFare(Ride[] ride)
         {
-           foreach (var total in rides)
-           {
-                 totalFare = totalFare + TotalFare(total.distance, total.time);
-           }
+            foreach (var item in ride)
+            {
+                this.totalFare = this.totalFare + this.TotalFare(item.RideType, item.Distance, item.Time);
+            }
 
-            totalRides = rides.Length;
-            aggregateFare = totalFare/totalRides;
-            return totalFare;
+            this.numberOfRides = ride.Length;
+            this.averageFare = this.totalFare / this.numberOfRides;
+            return this.totalFare;
         }
     }
 }
