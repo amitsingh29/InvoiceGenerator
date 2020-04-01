@@ -1,11 +1,14 @@
 using CabInvoiceGenerator;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 
 namespace NUnitTesting
 {
     public class Tests
     {
+        private object invoiceService;
+
         [SetUp]
         public void Setup()
         {
@@ -29,6 +32,23 @@ namespace NUnitTesting
             };
             double total = invoice.TotalFare(ride);
             Assert.AreEqual(272, total);
+        }
+
+        [Test]
+        public void InvoiceGeneratorMustReturn_TotalNumberOfRides_TotalFare_AverageFarePerRide()
+        {
+            InvoiceService invoice = new InvoiceService();
+            Ride[] ride = {
+                new Ride(10,12),
+                new Ride(10, 14),
+                new Ride(20,18)
+            };
+            double total = invoice.TotalFare(ride);
+            int totalRides = invoice.totalRides;
+            double averageFare = Math.Round(invoice.Aggregate, 2);
+            Assert.AreEqual(444, total);
+            Assert.AreEqual(3, totalRides);
+            Assert.AreEqual(148.0, averageFare);
         }
     }
 }
